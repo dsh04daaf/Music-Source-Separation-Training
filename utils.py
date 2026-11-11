@@ -94,6 +94,11 @@ def get_model_from_config(model_type: str, config_path: str) -> Tuple:
     elif model_type == 'bs_roformer':
         from models.bs_roformer import BSRoformer
         model = BSRoformer(**dict(config.model))
+    elif model_type == 'bs_roformer_custom':
+        # models that ship their own bs_roformer.py (unwa's HyperACE, FNO, Siamese, Large-Inst…): the runner
+        # downloads it to models/bs_roformer_custom/bs_roformer.py before each run (same approach as listra92's fork)
+        from models.bs_roformer_custom.bs_roformer import BSRoformer
+        model = BSRoformer(**dict(config.model))
     elif model_type == 'swin_upernet':
         from models.upernet_swin_transformers import Swin_UperNet_Model
         model = Swin_UperNet_Model(config)
